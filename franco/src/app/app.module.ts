@@ -8,13 +8,17 @@ import { environment } from '../environments/environment';
 import { MenuComponent } from './menu/menu.component';
 import { IntroComponent } from './intro/intro.component';
 import { PopisComponent } from './popis/popis.component';
+import { PonukaComponent } from './ponuka/ponuka.component';
+import { KontaktComponent } from './kontakt/kontakt.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     IntroComponent,
-    PopisComponent
+    PopisComponent,
+    PonukaComponent,
+    KontaktComponent
   ],
   imports: [
     BrowserModule,

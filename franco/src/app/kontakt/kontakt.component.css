@@ -1,0 +1,20 @@
+.kontakt {
+  text-align: center;
+  background-color: burlywood;
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+address {
+  font-style: normal;
+}
+
+.social {
+  padding: 5px;
+  width: 10px;
+}
+
+.center {
+  text-align: center;
+
+}
