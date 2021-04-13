@@ -1,10 +1,26 @@
 .popis {
   text-align: justify;
-  margin: 50px; 
-
+  margin: 50px;
 }
 
 .popis-headers {
   width: 100%;
   text-align: center;
+}
+
+.obr2 {
+  float: right;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  width: 170px;
+  height: 170px;
+}
+
+.obr3 {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: 170px;
+  height: 170px;
 }

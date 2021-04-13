@@ -28,6 +28,8 @@ h1 {
 }
 
 .celok {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  background-image: url("src/assets/img/OBR4.jpg");
+  background-size: cover;
+
+  
 }
