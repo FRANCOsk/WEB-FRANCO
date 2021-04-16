@@ -100,3 +100,8 @@ div {
   font-family: "Roboto";
   src: url(assets/font/Roboto-Regular.ttf);
 }
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url(assets/font/Roboto-Bold.ttf);
+}

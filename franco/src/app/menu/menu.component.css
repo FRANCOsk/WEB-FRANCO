@@ -1,26 +1,44 @@
 .uprava {
-    background-image: url("src/assets/img/Uvodny-PIC.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 450px;
-    text-align: center;
-    position: relative;
-  }
-  
-  
-  
-  .zmena {
-    margin-top: 160px;
-    margin-bottom: 20px;
-    position: absolute;
-    width: 100%;
-  }
-  
-  .zmena2 {
-    margin-top: 180px;
-    margin-bottom: 20px;
-    position: absolute;
-    width: 100%;
-  }
-  
+  background-image: url("src/assets/img/Uvodny-PIC.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 450px;
+  text-align: center;
+  position: relative;
+}
+
+.zmena {
+  margin-top: 160px;
+  margin-bottom: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+.zmena2 {
+  margin-top: 180px;
+  margin-bottom: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+.navigation {
+  background-color: red;
+  color: white;
+  text-align: center;
+  list-style-type: none;
+}
+
+.navigation li {
+  display: inline-block;
+  font-size: 20px;
+  font-family: "Roboto-Bold";
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.navigation a {
+  color: whitesmoke;
+}
