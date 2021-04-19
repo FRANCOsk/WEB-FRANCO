@@ -10,6 +10,7 @@ import { IntroComponent } from './intro/intro.component';
 import { PopisComponent } from './popis/popis.component';
 import { PonukaComponent } from './ponuka/ponuka.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
+import { BlokComponent } from './blok/blok.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { KontaktComponent } from './kontakt/kontakt.component';
     IntroComponent,
     PopisComponent,
     PonukaComponent,
-    KontaktComponent
+    KontaktComponent,
+    BlokComponent
   ],
   imports: [
     BrowserModule,

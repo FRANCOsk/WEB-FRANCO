@@ -1,0 +1,21 @@
+.blok {
+    padding-top: 5px;
+    margin: 10px;
+    height: 250px;
+    width: 350px;
+    box-shadow: 5px 5px 3px gray;
+    background-color: lightgray;
+    border-radius: 15px;
+  }
+  
+  .bloktext {
+    margin: 15px;
+    text-align: justify;
+  }
+  
+  .blok:hover {
+    box-shadow: 10px 10px 5px gray;
+  }
+  
+
+  

@@ -1,5 +1,5 @@
 .uprava {
-  background-image: url("src/assets/img/Uvodny-PIC.jpg");
+  background-image: url("src/assets/img/OBR5.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -22,13 +22,24 @@
   width: 100%;
 }
 
-h1,h2,h3 {
+h1 {
 
-color: white;
+color:whitesmoke;
 
 
 }
 
+h2 {
+
+color:yellow;
+
+}
+
+h3 {
+
+color:aquamarine;
+
+}
 
 .navigation {
   background-color: red;
