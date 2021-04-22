@@ -11,6 +11,7 @@ import { PopisComponent } from './popis/popis.component';
 import { PonukaComponent } from './ponuka/ponuka.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { BlokComponent } from './blok/blok.component';
+import { BanerComponent } from './baner/baner.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BlokComponent } from './blok/blok.component';
     PopisComponent,
     PonukaComponent,
     KontaktComponent,
-    BlokComponent
+    BlokComponent,
+    BanerComponent
   ],
   imports: [
     BrowserModule,

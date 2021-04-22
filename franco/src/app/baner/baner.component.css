@@ -1,0 +1,28 @@
+.baner {
+  background-color: chartreuse;
+  height: 40px;
+  
+}
+
+.header {
+  font-size: large;
+}
+
+.text {
+  font-size: medium;
+}
+
+.animation {
+  animation: moves 20s infinite;
+  animation-timing-function: linear;
+  position: relative;
+}
+
+@keyframes moves {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}
