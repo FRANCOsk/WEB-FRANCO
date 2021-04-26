@@ -1,5 +1,5 @@
 .uprava {
-  background-image: url("src/assets/img/OBR5.jpg");
+  background-image: url("src/assets/img/OBR4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -24,20 +24,20 @@
 
 h1 {
 
-color:whitesmoke;
+color:red;
 
 
 }
 
 h2 {
 
-color:yellow;
+color:blue;
 
 }
 
 h3 {
 
-color:aquamarine;
+color:yellow;
 
 }
 
