@@ -12,6 +12,7 @@ import { PonukaComponent } from './ponuka/ponuka.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { BlokComponent } from './blok/blok.component';
 import { BanerComponent } from './baner/baner.component';
+import { DodatokComponent } from './dodatok/dodatok.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BanerComponent } from './baner/baner.component';
     PonukaComponent,
     KontaktComponent,
     BlokComponent,
-    BanerComponent
+    BanerComponent,
+    DodatokComponent
   ],
   imports: [
     BrowserModule,

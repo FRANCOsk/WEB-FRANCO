@@ -1,11 +1,15 @@
 .popis {
   text-align: justify;
   margin: 50px;
+  background-color: black;
+  color: white;
 }
 
 .popis-headers {
   width: 100%;
   text-align: center;
+  background-color: black;
+  color: white;
 }
 
 .obr2 {
