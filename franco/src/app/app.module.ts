@@ -13,6 +13,7 @@ import { KontaktComponent } from './kontakt/kontakt.component';
 import { BlokComponent } from './blok/blok.component';
 import { BanerComponent } from './baner/baner.component';
 import { DodatokComponent } from './dodatok/dodatok.component';
+import { BootComponent } from './boot/boot.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DodatokComponent } from './dodatok/dodatok.component';
     KontaktComponent,
     BlokComponent,
     BanerComponent,
-    DodatokComponent
+    DodatokComponent,
+    BootComponent
   ],
   imports: [
     BrowserModule,

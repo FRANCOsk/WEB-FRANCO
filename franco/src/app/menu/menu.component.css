@@ -42,11 +42,16 @@ color:yellow;
 }
 
 .navigation {
-  background-color: red;
+  background-color:black;
   color: white;
   text-align: center;
   list-style-type: none;
+  padding-top: 50px;  
+  padding-bottom: 50px;
 }
+
+
+
 
 .navigation li {
   display: inline-block;

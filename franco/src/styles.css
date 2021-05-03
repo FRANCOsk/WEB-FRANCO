@@ -8,14 +8,12 @@ object,
 iframe,
 p,
 blockquote,
-pre,
 a,
 abbr,
 acronym,
 address,
 big,
 cite,
-code,
 del,
 dfn,
 em,
@@ -25,7 +23,6 @@ kbd,
 q,
 s,
 samp,
-small,
 strike,
 strong,
 sub,
@@ -36,9 +33,6 @@ b,
 u,
 i,
 center,
-dl,
-dt,
-dd,
 ol,
 ul,
 li,
@@ -91,6 +85,7 @@ h4 {
 
 body {
   font-family: "Roboto";
+  background-color: black;
 }
 div {
   font-family: "Roboto";
@@ -104,4 +99,27 @@ div {
 @font-face {
   font-family: "Roboto-Bold";
   src: url(assets/font/Roboto-Bold.ttf);
+}
+
+.pushable {
+  background: hsl(340deg 100% 32%);
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  width: 220px ;
+}
+.front {
+  display: block;
+  padding: 12px 42px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  background: hsl(345deg 100% 47%);
+  color: white;
+  transform: translateY(-6px);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
 }
