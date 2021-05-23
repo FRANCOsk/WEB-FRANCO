@@ -14,6 +14,7 @@ import { BlokComponent } from './blok/blok.component';
 import { BanerComponent } from './baner/baner.component';
 import { DodatokComponent } from './dodatok/dodatok.component';
 import { BootComponent } from './boot/boot.component';
+import { RokComponent } from './rok/rok.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BootComponent } from './boot/boot.component';
     BlokComponent,
     BanerComponent,
     DodatokComponent,
-    BootComponent
+    BootComponent,
+    RokComponent
   ],
   imports: [
     BrowserModule,
