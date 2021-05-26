@@ -263,3 +263,64 @@
     />
   </div>
 </form>
+<div id="dem" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#dem" data-slide-to="0" class="active"></li>
+    <li data-target="#dem" data-slide-to="1"></li>
+    <li data-target="#dem" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../assets/img/OBR1.jpg" width="1100" height="500" />
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/img/OBR2.jpg" width="1100" height="500" />
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/img/OBR3.jpg" width="1100" height="500" />
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#dem" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#dem" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#myModal"
+>
+  Otvorenie mod. okna
+</button>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Hlavicka</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">Toto je body</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >Zatvorit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="#" data-toggle="tooltip" title="tooltip">Tool</a>
+<script>
+
+$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
+
+
+</script>
