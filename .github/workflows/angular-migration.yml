@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - chore/modernize-angular-repository
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: angular-migration-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
