@@ -1,12 +1,9 @@
-name: Staged Angular migration
+name: Incremental Angular migration
 
 on:
   push:
     branches:
       - chore/modernize-angular-repository
-  pull_request:
-    branches:
-      - master
 
 permissions:
   contents: write
@@ -14,7 +11,7 @@ permissions:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: franco
@@ -25,91 +22,54 @@ jobs:
         with:
           ref: chore/modernize-angular-repository
 
-      - name: Detect completed migration
+      - name: Detect Angular and Node.js versions
         id: version
         shell: bash
         run: |
-          if grep -q '"@angular/core": "[~^]*22\.' package.json; then
+          current=$(node -p "require('./package.json').dependencies['@angular/core'].match(/[0-9]+/)[0]")
+          case "$current" in
+            11) target=12; node=12.22.12 ;;
+            12) target=13; node=14.21.3 ;;
+            13) target=14; node=14.21.3 ;;
+            14) target=15; node=16.20.2 ;;
+            15) target=16; node=16.20.2 ;;
+            16) target=17; node=18.20.8 ;;
+            17) target=18; node=18.20.8 ;;
+            18) target=19; node=20.19.0 ;;
+            19) target=20; node=20.19.0 ;;
+            20) target=21; node=22.22.3 ;;
+            21) target=22; node=22.22.3 ;;
+            22) target=22; node=22.22.3 ;;
+            *) echo "Unsupported Angular version: $current"; exit 1 ;;
+          esac
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+          echo "node=$node" >> "$GITHUB_OUTPUT"
+          if [ "$current" = "22" ]; then
             echo "complete=true" >> "$GITHUB_OUTPUT"
           else
             echo "complete=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Set up Node.js 12
-        if: steps.version.outputs.complete != 'true'
+      - name: Set up compatible Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "12.22.12"
+          node-version: ${{ steps.version.outputs.node }}
+          cache: npm
+          cache-dependency-path: franco/package-lock.json
 
-      - name: Migrate Angular 11 to 12
+      - name: Install current dependencies
         if: steps.version.outputs.complete != 'true'
+        run: npm install --no-audit --no-fund
+
+      - name: Migrate one Angular major version
+        if: steps.version.outputs.complete != 'true'
+        shell: bash
         run: |
-          npm install
-          npx -p @angular/cli@12 ng update @angular/core@12 @angular/cli@12 --force --allow-dirty
+          target="${{ steps.version.outputs.target }}"
+          npx --yes -p "@angular/cli@$target" ng update "@angular/core@$target" "@angular/cli@$target" --force --allow-dirty
 
-      - name: Set up Node.js 14
-        if: steps.version.outputs.complete != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "14.21.3"
-
-      - name: Migrate Angular 12 to 14
-        if: steps.version.outputs.complete != 'true'
-        run: |
-          npx -p @angular/cli@13 ng update @angular/core@13 @angular/cli@13 --force --allow-dirty
-          npx -p @angular/cli@14 ng update @angular/core@14 @angular/cli@14 --force --allow-dirty
-
-      - name: Set up Node.js 16
-        if: steps.version.outputs.complete != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "16.20.2"
-
-      - name: Migrate Angular 14 to 16
-        if: steps.version.outputs.complete != 'true'
-        run: |
-          npx -p @angular/cli@15 ng update @angular/core@15 @angular/cli@15 --force --allow-dirty
-          npx -p @angular/cli@16 ng update @angular/core@16 @angular/cli@16 --force --allow-dirty
-
-      - name: Set up Node.js 18
-        if: steps.version.outputs.complete != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18.20.8"
-
-      - name: Migrate Angular 16 to 18
-        if: steps.version.outputs.complete != 'true'
-        run: |
-          npx -p @angular/cli@17 ng update @angular/core@17 @angular/cli@17 --force --allow-dirty
-          npx -p @angular/cli@18 ng update @angular/core@18 @angular/cli@18 --force --allow-dirty
-
-      - name: Set up Node.js 20
-        if: steps.version.outputs.complete != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.19.0"
-
-      - name: Migrate Angular 18 to 20
-        if: steps.version.outputs.complete != 'true'
-        run: |
-          npx -p @angular/cli@19 ng update @angular/core@19 @angular/cli@19 --force --allow-dirty
-          npx -p @angular/cli@20 ng update @angular/core@20 @angular/cli@20 --force --allow-dirty
-
-      - name: Set up Node.js 22
-        if: steps.version.outputs.complete != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22.22.3"
-
-      - name: Migrate Angular 20 to 22
-        if: steps.version.outputs.complete != 'true'
-        run: |
-          npx -p @angular/cli@21 ng update @angular/core@21 @angular/cli@21 --force --allow-dirty
-          npx -p @angular/cli@22 ng update @angular/core@22 @angular/cli@22 --force --allow-dirty
-          npm install
-          npm run build -- --configuration production
-
-      - name: Commit migrated workspace
+      - name: Commit successful migration
         if: steps.version.outputs.complete != 'true'
         working-directory: .
         shell: bash
@@ -117,9 +77,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add franco
-          if git diff --cached --quiet; then
-            echo "No migration changes were produced."
-            exit 0
-          fi
-          git commit -m "build: migrate Angular workspace to version 22"
+          git commit -m "build: migrate Angular ${{ steps.version.outputs.current }} to ${{ steps.version.outputs.target }}"
           git push
+
+      - name: Validate Angular 22 production build
+        if: steps.version.outputs.complete == 'true' || steps.version.outputs.target == '22'
+        run: |
+          npm install --no-audit --no-fund
+          npm run build -- --configuration production
+          npm audit --audit-level=high
