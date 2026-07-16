@@ -74,7 +74,7 @@ jobs:
         shell: bash
         run: |
           target="${{ steps.version.outputs.target }}"
-          npx --yes -p "@angular/cli@$target" ng update "@angular/core@$target" "@angular/cli@$target" --force --allow-dirty
+          npx -p "@angular/cli@$target" ng update "@angular/core@$target" "@angular/cli@$target" --force --allow-dirty
 
       - name: Commit successful migration
         if: steps.version.outputs.complete != 'true'
