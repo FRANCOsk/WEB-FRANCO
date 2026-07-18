@@ -1,98 +1,45 @@
-name: Incremental Angular migration
+name: CI
 
 on:
   push:
-    branches:
-      - chore/modernize-angular-repository
+    branches: [master, chore/modernize-angular-repository]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 concurrency:
-  group: angular-migration-${{ github.head_ref || github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  migrate:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: franco
 
     steps:
-      - name: Check out working branch
-        uses: actions/checkout@v4
-        with:
-          ref: chore/modernize-angular-repository
+      - name: Check out repository
+        uses: actions/checkout@v5
 
-      - name: Detect Angular and Node.js versions
-        id: version
-        shell: bash
-        run: |
-          current=$(node -p "require('./package.json').dependencies['@angular/core'].match(/[0-9]+/)[0]")
-          case "$current" in
-            11) target=12; node=12.22.12 ;;
-            12) target=13; node=14.21.3 ;;
-            13) target=14; node=14.21.3 ;;
-            14) target=15; node=16.20.2 ;;
-            15) target=16; node=16.20.2 ;;
-            16) target=17; node=18.20.8 ;;
-            17) target=18; node=18.20.8 ;;
-            18) target=19; node=20.19.0 ;;
-            19) target=20; node=20.19.0 ;;
-            20) target=21; node=22.22.3 ;;
-            21) target=22; node=22.22.3 ;;
-            22) target=22; node=22.22.3 ;;
-            *) echo "Unsupported Angular version: $current"; exit 1 ;;
-          esac
-          echo "current=$current" >> "$GITHUB_OUTPUT"
-          echo "target=$target" >> "$GITHUB_OUTPUT"
-          echo "node=$node" >> "$GITHUB_OUTPUT"
-          if [ "$current" = "22" ]; then
-            echo "complete=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "complete=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Set up compatible Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ steps.version.outputs.node }}
+          node-version: 16.20.2
           cache: npm
           cache-dependency-path: franco/package-lock.json
 
-      - name: Install current dependencies
-        if: steps.version.outputs.complete != 'true'
-        run: npm install --no-audit --no-fund
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Migrate one Angular major version
-        if: steps.version.outputs.complete != 'true'
-        shell: bash
-        run: |
-          target="${{ steps.version.outputs.target }}"
-          npx -p "@angular/cli@$target" ng update "@angular/core@$target" "@angular/cli@$target" --force --allow-dirty
+      - name: Run unit tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
 
-      - name: Commit successful migration
-        if: steps.version.outputs.complete != 'true'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "4189828+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No migration changes were produced."
-            exit 0
-          fi
-          git commit -m "build: migrate Angular ${{ steps.version.outputs.current }} to ${{ steps.version.outputs.target }}"
-          git push
+      - name: Build production bundle
+        run: npm run build -- --configuration production
 
-      - name: Validate Angular 22 production build
-        if: steps.version.outputs.complete == 'true' || steps.version.outputs.target == '22'
-        run: |
-          npm install --no-audit --no-fund
-          npm run build -- --configuration production
-          npm audit --audit-level=high
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
