@@ -32,8 +32,10 @@ jobs:
           cache: npm
           cache-dependency-path: franco/package-lock.json
 
-      - name: Install dependencies and refresh lockfile
-        run: npm install --legacy-peer-deps --ignore-scripts --no-audit
+      - name: Install dependencies from a clean lockfile
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --legacy-peer-deps --ignore-scripts --no-audit
 
       - name: Run unit tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
