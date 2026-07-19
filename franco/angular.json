@@ -34,13 +34,11 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",      
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [
-     
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -75,9 +73,7 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              ]
             }
           },
           "defaultConfiguration": ""
