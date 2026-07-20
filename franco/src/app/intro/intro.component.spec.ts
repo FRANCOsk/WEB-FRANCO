@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IntroComponent } from './intro.component';
+import { MenuComponent } from '../menu/menu.component';
 
 describe('IntroComponent', () => {
   let component: IntroComponent;
@@ -8,9 +9,8 @@ describe('IntroComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IntroComponent ]
-    })
-    .compileComponents();
+      declarations: [IntroComponent, MenuComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
