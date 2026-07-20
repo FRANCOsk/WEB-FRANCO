@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { BlokComponent } from '../blok/blok.component';
 import { DodatokComponent } from './dodatok.component';
 
 describe('DodatokComponent', () => {
@@ -8,9 +9,8 @@ describe('DodatokComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DodatokComponent ]
-    })
-    .compileComponents();
+      declarations: [DodatokComponent, BlokComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
