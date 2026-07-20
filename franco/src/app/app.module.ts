@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { MenuComponent } from './menu/menu.component';
 import { IntroComponent } from './intro/intro.component';
 import { PopisComponent } from './popis/popis.component';
@@ -30,12 +28,8 @@ import { RokComponent } from './rok/rok.component';
     BootComponent,
     RokComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PonukaComponent } from './ponuka.component';
+import { BlokComponent } from '../blok/blok.component';
 
 describe('PonukaComponent', () => {
   let component: PonukaComponent;
@@ -8,9 +9,8 @@ describe('PonukaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PonukaComponent ]
-    })
-    .compileComponents();
+      declarations: [PonukaComponent, BlokComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

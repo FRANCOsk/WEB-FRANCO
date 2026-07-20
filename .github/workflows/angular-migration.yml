@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [master, chore/modernize-angular-repository]
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: franco
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.15.0
+
+      - name: Install dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install --ignore-scripts --no-audit
+
+      - name: Run unit tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Build production bundle
+        run: npm run build -- --configuration production
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high

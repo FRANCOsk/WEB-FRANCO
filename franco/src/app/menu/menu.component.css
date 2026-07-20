@@ -1,5 +1,5 @@
 .uprava {
-  background-image: url("src/assets/img/OBR4.jpg");
+  background-image: url("/assets/img/OBR4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -23,35 +23,25 @@
 }
 
 h1 {
-
-color:red;
-
-
+  color: red;
 }
 
 h2 {
-
-color:blue;
-
+  color: blue;
 }
 
 h3 {
-
-color:yellow;
-
+  color: yellow;
 }
 
 .navigation {
-  background-color:wheat;
+  background-color: wheat;
   color: white;
   text-align: center;
   list-style-type: none;
-  padding-top: 50px;  
+  padding-top: 50px;
   padding-bottom: 50px;
 }
-
-
-
 
 .navigation li {
   display: inline-block;

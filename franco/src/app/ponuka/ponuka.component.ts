@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ponuka',
+  standalone: false,
   templateUrl: './ponuka.component.html',
   styleUrls: ['./ponuka.component.css']
 })

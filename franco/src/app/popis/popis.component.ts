@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-popis',
+  standalone: false,
   templateUrl: './popis.component.html',
   styleUrls: ['./popis.component.css']
 })
