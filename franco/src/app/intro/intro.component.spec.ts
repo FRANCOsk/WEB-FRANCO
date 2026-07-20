@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BanerComponent } from '../baner/baner.component';
 import { BootComponent } from '../boot/boot.component';
 import { MenuComponent } from '../menu/menu.component';
+import { RokComponent } from '../rok/rok.component';
 import { IntroComponent } from './intro.component';
 
 describe('IntroComponent', () => {
@@ -11,7 +12,7 @@ describe('IntroComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IntroComponent, MenuComponent, BanerComponent, BootComponent]
+      declarations: [IntroComponent, MenuComponent, BanerComponent, BootComponent, RokComponent]
     }).compileComponents();
   });
 
